@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+
+<br>
+<!-- <h6>Hello, Welcome</h6> -->
+<h4><b>Add A New Category</b></h4>
+
+<br>
+
+<form action="" method="post" enctype="multipart/form-data" >
+    {{ form.hidden_tag() }}
+    
+    <div class="form-group">
+        {{ form.title.label }}
+        {{ form.title (class="form-control") }}
+    </div>
+
+    <div style="text-align: left;" class="form-group">
+        {{form.submit (class="button")}}
+    </div>
+
+    <div>
+        {% for candidate in categories %}
+        <div class="postCard">
+            <a href="{{url_for('editCandidate', candidate_id=candidate.id)}}">
+
+            <div>
+                <h5 class="text">{{candidate.title}}</h5>
+                <h6 class="text-muted">{{candidate.votes }}</h6>
+            </div>
+            <div>
+                <a href="{{url_for('deleteCandidate', candidate_id=candidate.id)}}">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    
+</form>
+</div>
+
+{% endblock %}

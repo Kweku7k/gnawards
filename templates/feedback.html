@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+
+<br>
+<!-- <h6>Hello, Welcome</h6> -->
+<h4><b>Leave us feedback</b></h4>
+
+<br>
+
+<form action="" method="post" >
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.phone.label }}
+        {{ form.phone (class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.feedback.label }}
+        {{ form.feedback (class="form-control", cols="35", rows="10") }}
+    </div>
+    <div style="text-align: left;" class="form-group">
+        {{form.submit (class="button")}}
+    </div>
+
+    <div class="form-group">
+
+    </div>
+    
+</form>
+</div>
+
+{% endblock %}

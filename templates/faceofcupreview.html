@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Of Cu</title>
+    <link rel="stylesheet" href="{{url_for("static", filename="css/style.css")}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+</head>
+<body style="margin:0">
+    <div style="width: 100vw; height: 60vh;">
+        <img src="{{url_for("static", filename='img/candidates/' + candidate.image_file)}}" width="100%" style="height: 60vh; object-fit: cover;" />
+
+
+    </div>  
+    <div class="container">
+        <br/>
+        <h6  class="text-muted">No. <span id="candidateId">{{candidate.id}}</span></h6>
+        <h6 id="candidateName"><b>{{candidate.name}}</b></h6>
+        <h6 class="text-muted">Age. {{candidate.age}}</h6>
+        <!-- <br/> -->
+        <p>{{candidate.description}}</p>
+    
+<br/>
+<!-- <h6 class="text-muted"><b>{{candidate.name.upper()}}</b></h6>
+        <div class="scrolling-wrapper-flexbox">
+
+    <div style="margin-right: 10px; border-radius: 10px;">
+        <img src="https://images.unsplash.com/photo-1495490140452-5a226aef25d4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGJsYWNrJTIwd29tZW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="candidatePicture" style="overflow: hidden; width:207px; height: 207px; border-radius: 20px;">
+    </div>
+    <div>
+        <img src="https://images.unsplash.com/photo-1495490140452-5a226aef25d4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGJsYWNrJTIwd29tZW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="candidatePicture" style="overflow: hidden; width:207px; height: 207px; border-radius: 20px;">
+    </div>
+    <div>
+        <img src="https://images.unsplash.com/photo-1495490140452-5a226aef25d4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGJsYWNrJTIwd29tZW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" class="candidatePicture" style="overflow: hidden; width:207px; height: 207px; border-radius: 20px;">
+    </div>
+ 
+</div> -->
+<div style="height: 10vh;">
+
+</div>
+    
+    
+
+</div>
+<div style="position: fixed; bottom: 10px; width: 100%;">    
+    <div style="text-align: center;">
+        <a href='{{url_for("votes")}}'>
+            <button class="button" style="margin: auto;" onclick="voteNow()">Vote For Me</button>
+        </a>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <script>
+        function voteNow(){
+            userId = document.getElementById('candidateId').innerText
+            userName = document.getElementById('candidateName').innerText
+            localStorage.setItem("userId", userId)
+
+        }
+    </script>
+</body>
+</html>

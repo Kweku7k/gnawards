@@ -1,0 +1,197 @@
+html{
+    scroll-behavior: smooth
+}
+
+body{
+  font-family: 'Plus Jakarta Display', sans-serif;
+}
+
+.text{
+    margin-bottom: 0;
+}
+
+.scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .candidateCard {
+    flex: 0 0 auto;
+    background-color: rgb(243, 243, 243);
+    /* padding: 20px;  */
+    width: 60%;
+    margin-right: 10px;
+    border-radius:20px ;
+    width:207px; 
+    height: 307px;
+  }
+
+  .candidatePicture{
+      width: 100%;
+      object-fit: cover;
+      margin-bottom: 10px;
+
+  }
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.votebutton{
+    background-color: #DA2C27;
+    /* padding: 10px 10px 10px 10px; */
+    border: none;
+    height: fit-content;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 25px 10px 25px;
+
+}
+
+
+.votingCard{
+    display: flex;
+    padding: 20px;
+    background-color:rgb(236, 236, 236) ;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+
+.button{
+    background-color: #DA2C27;
+    padding: 12px 20px;
+    font-weight: 300;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.ellipse{
+    width: 60px;
+    height: 60px;
+    background-color: #DA2C27;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.votingEllipse{
+    width: 60px;
+    height: 60px;
+    background-color: #DA2C27;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+
+.adminCard{
+    background-color: #f7f7f7;
+    padding: 10%;
+    border-radius:20px ;
+    margin-bottom: 20px;
+    /* border: 1px solid black; */
+}
+
+.postCard{
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius:10px ;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.button-outline{
+    color: #DA2C27;
+    padding: 12px 20px;
+    font-weight: 300;
+    border: 2px solid red;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+#hero{
+    width: 100vw;
+    /* height: 80vh;    */
+    /* background-color: teal; */
+    background-image: url(../img/hero.jpg);  
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    /* position: absolute; */
+    color: white;
+}
+
+.overlay{
+    width: 100%;
+    /* height: 80vh; */
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+    background-color: rgba(0, 0, 0, 0.636);
+    position: relative;
+}
+
+.subcard{
+    padding: 10px;
+    background-color: #f7f7f7;
+    /* margin-bottom: 30px; */
+}
+
+section{
+    margin-bottom: 5vh;
+}
+
+.header-line{
+    width: 50px; 
+    text-align: left; 
+    margin-left: 0; 
+    background-color:#DA2C27;
+}
+
+.flexrow{
+    display: flex;
+    justify-content: space-between;
+}
+
+.conversation{
+    display: flex;
+    border: 1px solid rgba(128, 128, 128, 0.466);
+    border-radius: 10px;
+    padding:10px;
+    margin-bottom: 3vh;
+}
+
+.scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .card {
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+.image{
+    height:'300px';
+    object-fit: 'cover';
+    width:"100%"
+}
+
+footer{
+    background-color: #992726;
+    width: 100vw;
+    padding:10px;
+    color: white;
+
+}
+
+.icon{
+    padding: 10px;
+}
