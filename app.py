@@ -1,4 +1,5 @@
 # from _typeshed import NoneType
+from json.tool import main
 from unicodedata import category
 from flask import Flask,redirect,url_for,render_template,request
 from flask.helpers import flash
@@ -52,17 +53,19 @@ class Candidates(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+    category = db.Column(db.String)
+    subcategory = db.Column(db.String)
     description = db.Column(db.String)
     number = db.Column(db.String(), default=0)
     age = db.Column(db.String)
     votes = db.Column(db.Integer, default = 0)
     image_file = db.Column(db.String(200), default='default.png')
     updatedVotes = db.Column(db.Integer, default = 0)
-
+    
+    # approved = db.Column(db.Boolean, default=False, nullable=False)
 
     def __repr__(self):
         return f"Candidates('{self.id}', '{self.name}')"
-
 
 
 class Issue(db.Model):
@@ -101,7 +104,6 @@ class Votes(db.Model):
     def __repr__(self):
         return f"Vote Ghc('{self.amount}', ' - {self.candidateId}')"
 
-
 class Category(db.Model):
     tablename = ['Cateogy']
 
@@ -111,6 +113,18 @@ class Category(db.Model):
     
     def __repr__(self):
         return f"Category ('{self.title}')"
+
+
+class SubCategory(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    parent = db.Column(db.String)
+    title = db.Column(db.String)
+    mainCategory = db.Column(db.String)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return f"SubCategory ('{self.title}' = '{self.parent}' )"
 
 
 class Gallery(db.Model):
@@ -163,7 +177,9 @@ def post(id):
 @app.route("/addcontestant", methods=['POST','GET'])    
 def addcontestant():
     form = AddContestant()
+    print("in form function")
     if form.validate_on_submit():
+        print("validated successful")
         newForm = Candidates(name=form.name.data, age=form.age.data, description=form.description.data, image_file=form.picture.data, votes=form.votes.data, number=form.number.data)
         db.session.add(newForm)
         db.session.commit()
@@ -173,6 +189,9 @@ def addcontestant():
         sendtelegram(newNominationMessage) 
         # return redirect(url_for('adminCandidates'))
         return redirect(url_for('home'))
+    else:
+        flash(f'There has been a problem, please try again later', 'danger')
+        
     return render_template('addcontestant.html', form=form)
 
 @app.route("/addcategory", methods=['POST','GET'])    
@@ -190,6 +209,33 @@ def addCategory():
         # return redirect(url_for('adminCandidates'))
         return redirect(url_for('addCategory'))
     return render_template('addcategory.html', categories=categories, form=form)
+
+@app.route("/addsubcategory", methods=['POST','GET'])    
+def addSubCategory():
+    # form = AddCategory()
+    mainCategory = "asdf"
+    print(mainCategory)
+    categories = Category.query.order_by(Category.id.desc()).all()
+    subcategories = SubCategory.query.all()
+    if request.method == 'POST':
+        mainCategory = request.form.get('category')
+        newSubcategory = SubCategory(parent=mainCategory, title=request.form.get('subcategory'))
+        db.session.add(newSubcategory)
+        db.session.commit()
+        flash(f' ' + mainCategory + ' subcategory has been created', 'success')
+        # sendtelegram(form.name.data + " has been nominated. Call on:" + form.number.data) 
+        # newNominationMessage="New Nomination:" + form.name.data + " : " + form.number.data + "\n" + form.description.data
+        # sendtelegram(newNominationMessage) 
+        # return redirect(url_for('adminCandidates'))
+        return redirect(url_for('addSubCategory'))
+    return render_template('addsubcategory.html', categories=categories, subcategories=subcategories )
+
+@app.route("/category/<string:category>")
+def showCategory(category):
+    print(category)
+    subcategories = SubCategory.query.filter_by(parent = category).all()
+    print(subcategories)
+    return render_template('gallery.html', category=category, subcategories=subcategories)
 
 
 @app.route("/delete/<int:post_id>")

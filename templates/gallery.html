@@ -6,33 +6,30 @@
     <div class="flexrow">   
         <div>
             <br/>
-            <h4>Gallery</h4>
+            <h4>{{category}}</h4>
             <hr class="header-line">
         </div>
        
     </div>
     <div class="row">
 
-        {% for picture in gallery %}
-        <div class="col-md-4">
-            <a href="{{picture.image}}">
-
-            <div>
-
-            <div class="card" >
-                <div>
-                    <!-- {{ url_for('static',filename='img/Fries-porn.png')}} -->
-                    <img src="{{picture.image}}" height="300px" style="object-fit: cover;" alt="SRC SOCIALS" width="100%" alt="SRC SOCIALS">
+        {% for category in subcategories %}
+        
+        <div class="col-md-4" >
+                <div data-aos="fade-up" data-aos-delay="100">
+                <div class="conversation">
+                <!-- <img src="{{url_for("static",filename="img/nkrumah.png")}}" width="70px" height="70px" style="object-fit: cover; "> -->
+                <div style="padding: 10px;">
+                    <h6 style="margin-bottom: 0; align-items: center;"><b>{{category.title}}</b></h6>
+                    <p class="text-muted" style="margin-bottom: 0;">{{category.parent}}</p>
                 </div>
-                <!-- <div class="subcard">
-                    <h4>{{picture.title}} <i class="fa fa-arrow-right" aria-hidden="true"></i></h4>
-                    <h6 class="text-muted" style="font-weight: 100;">View More</h6>
-                </div> -->
             </div>
         </div>
-        </a>    
-        </div>
+        </div>  
+
         {% endfor %}
+
+    </div>
 
     </div>
 </div>

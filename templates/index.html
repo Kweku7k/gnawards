@@ -15,7 +15,8 @@
                     <!-- <h6 style="font-weight: 100;">WELCOME TO CU SRC</h6> -->
                     <h1><b>GNMEA</b></h1>
                     <!-- <p>We are here for you. You can find all the information concerning the school here. You can also contact us for any pressing information</p> -->
-                    <p>This is an awards event to honour our prestigeous nursing students. They put forth care and patience in taking care of us. We want to honour them by showing support and awarding them. Nominate a nursing student today. </p>
+                    <p>This is the maiden edition of the Ghana Nurses and Midwives Excellence Awards organized by Innovative Quadrant (IQGH) and as such we are writing to you to partner with us on this project. Ghana Nurses And Midwives Excellence Awards is the first ever, inspiring and competitive educational, creative and entertainment  Awards program that aims to recognize Nurses/Midwife students who have shown exceptional hard work to enrich campus life in excellence and in health.
+                    </p>
                     <a href="{{url_for("addcontestant")}}">
                         <button class="button">Nominate someone</button>
                     </a>
@@ -115,10 +116,13 @@
                 <div data-aos="fade-up" data-aos-delay="100">
                 <div class="conversation">
                 <!-- <img src="{{url_for("static",filename="img/nkrumah.png")}}" width="70px" height="70px" style="object-fit: cover; "> -->
-                <div style="padding: 10px;">
-                    <h6 style="margin-bottom: 0; align-items: center;"><b>{{category.title}}</b></h6>
-                    <p class="text-muted" style="margin-bottom: 0;"><b>6</b> contestants</p>
-                </div>
+                <a href='{{url_for("showCategory", category=category.title)}}'>
+
+                    <div style="padding: 10px;">
+                        <h6 style="margin-bottom: 0; align-items: center;"><b>{{category.title}}</b></h6>
+                        <p class="text-muted" style="margin-bottom: 0;"><b>6</b> contestants</p>
+                    </div>
+                </a>
             </div>
         </div>
         </div>  
