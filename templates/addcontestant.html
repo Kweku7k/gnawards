@@ -11,7 +11,11 @@
 
 <form action="" method="post" enctype="multipart/form-data" >
     {{ form.hidden_tag() }}
-    
+    <label for="image-picker">
+        <img id="image-preview" style="max-width: 30vw; max-height: 30vh; object-fit:cover" src="http://dummyimage.com/400x200/f5f5f5/000.jpg&text=Click+here+to+upload+your+image" alt="your image" />
+    </label>
+
+    <input style="display:none" id="image-picker" type="file" accept="image/*" />
     <div class="form-group">
         {{ form.name.label }}
         {{ form.name (class="form-control") }}
@@ -28,6 +32,11 @@
         {{ form.number.label }}
         {{ form.number (class="form-control") }}
     </div>
+    <div style="display: none;" class="form-group">
+        {{ form.picture.label }}
+        {{ form.picture (id="firebaseLink",class="form-control") }}
+    </div>
+    <!-- <input type="text"  id="firebaseLink"> -->
     <!-- <div class="form-group">
         {{ form.votes.label }}
         {{ form.votes (class="form-control") }}
@@ -42,28 +51,121 @@
                 {% endfor %}
             {% endif%}
     </div> -->
-    <div style="text-align: left;" class="form-group">
-        {{form.submit (class="button")}}
+    <!-- <div style="text-align: left;" class="form-group">
+        {{form.submit (id="submitButton",class="button")}}
+    </div> -->
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Select Category</label>
+        <select class="form-control" name="category" id="exampleFormControlSelect1">
+            {% for subCategory in subcategories %}
+            <option>{{subCategory.title}}</option>
+            {% endfor %}
+        </select>
+      </div>
+
+    <div id="submitButton" style="text-align: left;"  class="form-group disabled">
+        <button class="button" style="background-color: #da2d2770;">Submit</button>
     </div>
 
-    {% for candidate in category %}
-            <div class="postCard">
-                <a href="{{url_for('editCandidate', candidate_id=candidate.id)}}">
 
-                <div>
-                    <h5 class="text">{{candidate.title}}</h5>
-                    <h6 class="text-muted">{{candidate.votes }}</h6>
-                </div>
-                <div>
-                    <a href="{{url_for('deleteCandidate', candidate_id=candidate.id)}}">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
-                </div>
-                </a>
-            </div>
-            {% endfor %}
+
     
 </form>
 </div>
+
+<script>
+
+$("#image-picker").change(function (event) {
+    readURL(this);
+});
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        pushImage(input.files[0])
+
+        reader.onload = function (e) {
+            $('#image-preview').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+
+
+<script>
+
+    var firebaseLink = document.getElementById("firebaseLink").innerText
+    // Push batch images to storage and store references in the database
+    var pushImage = function (file) {
+        document.getElementById('submitButton').innerHTML = `
+        <button class="button" style="background-color: #da2d2770;"><i class="fa fa-pause-circle-o" aria-hidden="true" style="color:'white'"></i>Uploading Images</button>
+        `
+
+       // var uid = firebase.auth().currentUser.uid;
+       // Create storage reference
+       var ref = firebase.storage().ref(`/ineruu-142dc-default-rtdb/Images/`).child(file.name + ".jpg");
+   
+       // Upload file and get task
+       var task = ref.put(file, {contentType: file.type});
+    
+       // Monitor task for progress
+       task.on('state_changed',
+           // Shows progress of task
+           function progress(snapshot) {
+               var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+               console.log(percentage);
+           },
+           // Shows any errors occurring during progress
+           function error(err) {
+               // Handle unsuccessful uploads
+               console.log(err.message);
+   
+           },
+           // Shows when task is completed
+           function complete() {
+               // Handle successful uploads on complete
+               var image = task.snapshot.downloadUrl;
+               var secondImage = task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+           console.log('File available at', downloadURL);
+        //    firebaseLink = downloadURL
+           document.getElementById("firebaseLink").value = downloadURL
+           console.log("Firebase Link: " + firebaseLink)
+            document.getElementById('submitButton').innerHTML = `{{form.submit (class="button")}}`
+
+         });
+               console.log(task);
+               console.log(image);
+               console.log(secondImage.PromiseResult).then(res => {
+                   console.log("THis is" + res)
+                   
+               });
+   
+               // Data model to be uploaded to the database
+               var data = {
+                   imageUrl: image
+               };
+               
+               // var db = firebase.database().ref(/GHotelBookMan/Hotels/${uid}/Images).push();
+               // db.set(data).then(() => {
+               //     row.empty();
+               //     loadCurrentHotel(uid);
+               // });
+           });  
+   };
+   
+   
+     function changeimagesss(event) {
+       console.log(event)
+       // console.log(event.target.files[0])
+       // var uploadItem = event.target.files[0]
+       // console.log(uploadItem)
+       pushImage(event)
+   
+       
+     }
+   
+    </script>
 
 {% endblock %}

@@ -29,8 +29,8 @@ migrate = Migrate(app, db)
 
 app.config['SECRET_KEY'] = 'll91628bb0b13ce0c676d32e2vsba245'
 app.config['UPLOADED_IMAGES_DEST'] = 'static/uploads/images'
-app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///test.db'
-
+# app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI']= 'postgres://eaozkuagjcyspm:4b1d05b75a1d0e956977ccab32d3c6542ad6f433d65ef2ea7cd9d0e3be069e77@ec2-3-217-251-77.compute-1.amazonaws.com:5432/d3nljg5tlb58ot'
 # Takes the name of the file and the extensions
 images = UploadSet('images', IMAGES)
 configure_uploads(app, images)
@@ -178,6 +178,7 @@ def post(id):
 def addcontestant():
     form = AddContestant()
     print("in form function")
+    subcategories = SubCategory.query.all()
     if form.validate_on_submit():
         print("validated successful")
         newForm = Candidates(name=form.name.data, age=form.age.data, description=form.description.data, image_file=form.picture.data, votes=form.votes.data, number=form.number.data)
@@ -185,14 +186,14 @@ def addcontestant():
         db.session.commit()
         flash(f' ' + form.name.data + ' has been nominated for review', 'success')
         # sendtelegram(form.name.data + " has been nominated. Call on:" + form.number.data) 
-        newNominationMessage="New Nomination:" +"\n" + form.name.data + " : " + form.number.data + "\n" + form.description.data
+        newNominationMessage="New Nomination:" +"\n" + form.name.data + " : " + form.number.data + "\n" + form.description.data + "\n" + form.picture.data
         sendtelegram(newNominationMessage) 
         # return redirect(url_for('adminCandidates'))
         return redirect(url_for('home'))
     else:
         flash(f'There has been a problem, please try again later', 'danger')
         
-    return render_template('addcontestant.html', form=form)
+    return render_template('addcontestant.html', form=form, subcategories=subcategories)
 
 @app.route("/addcategory", methods=['POST','GET'])    
 def addCategory():
