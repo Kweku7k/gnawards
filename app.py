@@ -186,12 +186,12 @@ def addcontestant():
         db.session.commit()
         flash(f' ' + form.name.data + ' has been nominated for review', 'success')
         # sendtelegram(form.name.data + " has been nominated. Call on:" + form.number.data) 
-        newNominationMessage="New Nomination:" +"\n" + form.name.data + " : " + form.number.data + "\n" + form.description.data + "\n" + form.category.data  + "\n" + form.picture.data
+        newNominationMessage="New Nomination:" +"\n" + form.name.data + " : " + form.number.data + "\n" + form.description.data + "\n" + "Category : " + form.category.data  + "\n" + form.picture.data
         sendtelegram(newNominationMessage) 
         # return redirect(url_for('adminCandidates'))
         return redirect(url_for('home'))
-    else:
-        return redirect(url_for('home'))
+    # else:
+    #     return redirect(url_for('home'))
         # flash(f'There has been a problem, please try again later', 'danger')
         
     return render_template('addcontestant.html', form=form, categories=categories)

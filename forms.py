@@ -1,3 +1,4 @@
+from unicodedata import category
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.fields.core import IntegerField
@@ -27,6 +28,7 @@ class AddCategory(FlaskForm):
 
 class AddContestant(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
+    category = StringField('Name', validators=[DataRequired()])
     age = StringField('Age', validators=[DataRequired()])
     number = StringField('Phone number', validators=[DataRequired()])
     description = StringField('Why should we nominate you?', widget=TextArea(), validators=[DataRequired()])
