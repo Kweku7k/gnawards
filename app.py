@@ -178,22 +178,23 @@ def post(id):
 def addcontestant():
     form = AddContestant()
     print("in form function")
-    subcategories = SubCategory.query.all()
+    categories = Category.query.all()
     if form.validate_on_submit():
         print("validated successful")
-        newForm = Candidates(name=form.name.data, age=form.age.data, description=form.description.data, image_file=form.picture.data, votes=form.votes.data, number=form.number.data)
+        newForm = Candidates(name=form.name.data, age=form.age.data, category=form.category.data, description=form.description.data, image_file=form.picture.data, votes=form.votes.data, number=form.number.data)
         db.session.add(newForm)
         db.session.commit()
         flash(f' ' + form.name.data + ' has been nominated for review', 'success')
         # sendtelegram(form.name.data + " has been nominated. Call on:" + form.number.data) 
-        newNominationMessage="New Nomination:" +"\n" + form.name.data + " : " + form.number.data + "\n" + form.description.data + "\n" + form.picture.data
+        newNominationMessage="New Nomination:" +"\n" + form.name.data + " : " + form.number.data + "\n" + form.description.data + "\n" + form.category.data  + "\n" + form.picture.data
         sendtelegram(newNominationMessage) 
         # return redirect(url_for('adminCandidates'))
         return redirect(url_for('home'))
     else:
-        flash(f'There has been a problem, please try again later', 'danger')
+        return redirect(url_for('home'))
+        # flash(f'There has been a problem, please try again later', 'danger')
         
-    return render_template('addcontestant.html', form=form, subcategories=subcategories)
+    return render_template('addcontestant.html', form=form, categories=categories)
 
 @app.route("/addcategory", methods=['POST','GET'])    
 def addCategory():
