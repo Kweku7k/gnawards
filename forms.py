@@ -28,8 +28,9 @@ class AddCategory(FlaskForm):
 
 class AddContestant(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    category = StringField('Name', validators=[DataRequired()])
     age = StringField('Age', validators=[DataRequired()])
+    institution = StringField('Institution', validators=[DataRequired()])
+    category = StringField('Cateogory', validators=[DataRequired()])
     number = StringField('Phone number', validators=[DataRequired()])
     description = StringField('Why should we nominate you?', widget=TextArea(), validators=[DataRequired()])
     picture = StringField('Add a picture')

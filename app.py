@@ -58,6 +58,7 @@ class Candidates(db.Model):
     description = db.Column(db.String)
     number = db.Column(db.String(), default=0)
     age = db.Column(db.String)
+    institution = db.Column(db.String())
     votes = db.Column(db.Integer, default = 0)
     image_file = db.Column(db.String(), default='default.png')
     picture = db.Column(db.String(), default='default.png')
@@ -183,12 +184,12 @@ def addcontestant():
     subcategories = SubCategory.query.all()
     if form.validate_on_submit():
         print("validated successful")
-        newForm = Candidates(name=form.name.data, age=form.age.data, category=form.category.data, description=form.description.data, image_file=form.picture.data, votes=form.votes.data, number=form.number.data)
+        newForm = Candidates(name=form.name.data, age=form.age.data, category=form.category.data, description=form.description.data, institution=form.institution.data, image_file=form.picture.data, votes=form.votes.data, number=form.number.data)
         db.session.add(newForm)
         db.session.commit()
         flash(f' ' + form.name.data + ' has been nominated for review', 'success')
         # sendtelegram(form.name.data + " has been nominated. Call on:" + form.number.data) 
-        newNominationMessage="New Nomination:" +"\n" + form.name.data + " : " + form.number.data + "\n" + form.description.data + "\n" + "Category : " + form.category.data  + "\n" + form.picture.data
+        newNominationMessage="New Nomination:" +"\n" + form.name.data + " : " + form.number.data + "\n" + form.description.data + "\n" + "Category : " + form.category.data  + "\n" + "Instituition : " + form.institution.data  + "\n" + form.picture.data
         sendtelegram(newNominationMessage) 
         # return redirect(url_for('adminCandidates'))
         return redirect(url_for('home'))
