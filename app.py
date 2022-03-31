@@ -59,7 +59,8 @@ class Candidates(db.Model):
     number = db.Column(db.String(), default=0)
     age = db.Column(db.String)
     votes = db.Column(db.Integer, default = 0)
-    image_file = db.Column(db.String(200), default='default.png')
+    image_file = db.Column(db.String(), default='default.png')
+    picture = db.Column(db.String(), default='default.png')
     updatedVotes = db.Column(db.Integer, default = 0)
     
     # approved = db.Column(db.Boolean, default=False, nullable=False)
@@ -179,6 +180,7 @@ def addcontestant():
     form = AddContestant()
     print("in form function")
     categories = Category.query.all()
+    subcategories = SubCategory.query.all()
     if form.validate_on_submit():
         print("validated successful")
         newForm = Candidates(name=form.name.data, age=form.age.data, category=form.category.data, description=form.description.data, image_file=form.picture.data, votes=form.votes.data, number=form.number.data)
@@ -194,7 +196,7 @@ def addcontestant():
     #     return redirect(url_for('home'))
         # flash(f'There has been a problem, please try again later', 'danger')
         
-    return render_template('addcontestant.html', form=form, categories=categories)
+    return render_template('addcontestant.html', form=form, subcategories=subcategories, categories=categories)
 
 @app.route("/addcategory", methods=['POST','GET'])    
 def addCategory():

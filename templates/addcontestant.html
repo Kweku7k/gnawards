@@ -58,7 +58,7 @@
     <div class="form-group">
         <label for="exampleFormControlSelect1">Select Category</label>
         <select name="category" class="form-control" name="category" id="exampleFormControlSelect1">
-            {% for category in categories %}
+            {% for category in subcategories %}
             <option>{{category.title}}</option>
             {% endfor %}
         </select>
