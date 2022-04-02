@@ -12,7 +12,8 @@
 </head>
 <body style="margin:0">
     <div style="width: 100vw; height: 60vh;">
-        <img src="{{url_for("static", filename='img/candidates/' + candidate.image_file)}}" width="100%" style="height: 60vh; object-fit: cover;" />
+        <!-- <img src="{{url_for("static", filename='img/candidates/' + candidate.image_file)}}" width="100%" style="height: 60vh; object-fit: cover;" /> -->
+        <img src="{{candidate.image_file}}" width="100%" style="height: 60vh; object-fit: cover;" />
 
 
     </div>  

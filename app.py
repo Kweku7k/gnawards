@@ -184,7 +184,7 @@ def addcontestant():
     subcategories = SubCategory.query.all()
     if form.validate_on_submit():
         print("validated successful")
-        newForm = Candidates(name=form.name.data, age=form.age.data, category=form.category.data, description=form.description.data, institution=form.institution.data, image_file=form.picture.data, votes=form.votes.data, number=form.number.data)
+        newForm = Candidates(name=form.name.data, age="21", category=form.category.data, description=form.description.data, institution=form.institution.data, image_file=form.picture.data, votes=form.votes.data, number=form.number.data)
         db.session.add(newForm)
         db.session.commit()
         flash(f' ' + form.name.data + ' has been nominated for review', 'success')
@@ -238,9 +238,10 @@ def addSubCategory():
 @app.route("/category/<string:category>")
 def showCategory(category):
     print(category)
-    subcategories = SubCategory.query.filter_by(parent = category).all()
-    print(subcategories)
-    return render_template('gallery.html', category=category, subcategories=subcategories)
+    # session['username'] = 'admin'
+    candidates = Candidates.query.filter_by(category = category).all()
+    print(candidates)
+    return render_template('allCandidates.html', category=category, candidates=candidates)
 
 
 @app.route("/delete/<int:post_id>")

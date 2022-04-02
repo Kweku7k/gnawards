@@ -54,6 +54,7 @@ a{
 .votingCard{
     display: flex;
     padding: 20px;
+    align-items: center;
     background-color:rgb(236, 236, 236) ;
     border-radius: 20px;
     margin-bottom: 20px;

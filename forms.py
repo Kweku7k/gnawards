@@ -28,7 +28,7 @@ class AddCategory(FlaskForm):
 
 class AddContestant(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    age = StringField('Age', validators=[DataRequired()])
+    age = StringField('Age', validators=[])
     institution = StringField('Institution', validators=[DataRequired()])
     category = StringField('Cateogory', validators=[DataRequired()])
     number = StringField('Phone number', validators=[DataRequired()])
