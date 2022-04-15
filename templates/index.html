@@ -46,7 +46,8 @@ IQgh is an organisation created to change this, with a focus on rewarding these 
     </div>
   </div> -->
 
-<!-- <section id="new">
+
+<section id="new">
 <div class="container">
     <div class="flexrow">   
         <div>
@@ -59,9 +60,8 @@ IQgh is an organisation created to change this, with a focus on rewarding these 
     </div>
     <div class="row">
 
-        {% for post in limitpost %}
+        {% for post in limitpost %} 
         <div class="col-md-4">
-            <a href="{{url_for('post',id=post.id)}}">
 
             <div data-aos="fade-up" data-aos-delay="100">
 
@@ -69,8 +69,8 @@ IQgh is an organisation created to change this, with a focus on rewarding these 
                 
             <div class="card" style="width: 100%;">
                 <div>
-                    {{ url_for('static',filename='img/Fries-porn.png')}}
-                    <img src="{{url_for("static", filename='uploads/images/' + post.image_file)}}" alt="SRC SOCIALS" width="100%">
+                    <!-- {{ url_for('static',filename='img/Fries-porn.png')}} -->
+                    <!-- <img src="{{url_for("static", filename='uploads/images/' + post.image_file)}}" alt="SRC SOCIALS" width="100%"> -->
                     <img src="{{post.author}}" height="300px" style="object-fit: cover;" alt="SRC SOCIALS" width="100%">
                 </div>
                 <div class="subcard">
@@ -81,12 +81,72 @@ IQgh is an organisation created to change this, with a focus on rewarding these 
         </a>
 
         </div>
+    </div>    
         {% endfor %}
-
        
     </div>
 </div>
-</section> -->
+</section>
+
+
+<section id="new">
+    <div class="container">
+        <div class="flexrow">   
+            <div>
+                <h4>About Us</h4>
+                <hr class="header-line">
+            </div>
+            </div>
+            <!-- <a href="{{url_for("updates")}}">
+                <u><h6 style="font-weight: 100;">View All <i class="fas fa-long-arrow-alt-right"></i></h6></u>
+            </a> -->
+
+            <p>
+                GNMEA 
+
+Overview
+Ghana nurses and midwife Excellence Awards is an initiative headlined by Golbal media Alliance (ETV,Yfm and happy fm) and also in partnership with UNSAG and GHATi.
+1. It focuses on putting students on platforms and getting them recognized to the general public and copperative brands and individuals as well.
+2. Its an award scheme for both degree nursing/midwives students and traning nurses/mideives 
+3. It awill also serve as a medium to bring all health students together from different parts of the country.
+4. Though its an awards scheme, the platform creates a business activity as well for students to be recognized by sponsors or other brands out there. 
+In this awards scheme you can be awinner but might not a brand ambassador or might not be rewarded by them due to the task preformed for them
+4. Additionally its a platform seekng to bring brands(institutions) closer to their target audience to create a business.
+5. Application is for free on our website 
+6. All students participants are advised to get a passport so incase if you should win the travel package the process would be easy (if they have or dont have you will be given a link to get one done the moment they are selected)
+This awards is a business, lifestyle and academia awards 
+
+Requirements 
+They are over 25 categories 
+Some of them comes with requirements needed to endorse your skill talent or academic background.
+
+Task
+Every Nominee gets a chanve to be interviewed on air live with sponsors or bloggers 
+Based on category requirements students nominees works are publiced equally to create awareness 100% for their skill talent or business.
+Every Nominee for a period would have a chance to impress a brand or sponsor by performing a task or activity for a brand 
+This will give students the chance to have a working relationship with the brand that gets to be impressed.
+
+Benefits of all Nominees
+ Publicity (on Air, websites, bloggers sites and socials)
+Business deals and prices(most be performed nominee on task associated with brands)
+
+
+Awards and Benefits
+1.Every winner of each category will be awarded a plaque and citation.
+2.Highest number of votes will give students in any category a prize packages all under terms and conditions.
+-vacation trip.
+3.Though its an awards we would equally appreciate second highest voters with an internal classy vacation trip. 
+-electronic gadgets nad cash will also be awarded to category winners who will all reach the terms and conditions of their category.
+
+This is the biggest nurses and midwives awards festival.
+            </p>
+        </div>
+        <div class="row">
+
+        </div>
+        </div>  
+</section>    
+
 
 <!-- <section>
     <div style="background-color: darkred; color: white; padding: 10px; padding: 30px 10px; text-align: center;">
