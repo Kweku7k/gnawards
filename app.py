@@ -167,7 +167,7 @@ def faceofcu():
 # Default Config
 @app.route('/',methods=['GET','POST'])
 def home():
-    limitpost = Posts.query.order_by(Posts.id.desc()).limit(3).all()
+    limitpost = Posts.query.order_by(Posts.id.asc()).limit(3).all()
     categories = SubCategory.query.order_by(SubCategory.id.desc()).all()
     print("The Posts" + str(limitpost)) 
     return render_template('index.html', categories=categories,limitpost=limitpost)
