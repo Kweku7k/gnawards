@@ -9,7 +9,7 @@ from wtforms.widgets import TextArea
 class AddPostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     author = StringField('Author', validators=[DataRequired()])
-    picture = FileField('Add a picture', validators=[ FileAllowed(['jpg', 'png','jpeg'])])
+    picture = FileField('Add a picture', validators=[ DataRequired(), FileAllowed(['jpg', 'png','jpeg'])])
     content = StringField('Description', widget=TextArea(), validators=[DataRequired()])
     submit = SubmitField()
 
@@ -25,13 +25,12 @@ class AddCategory(FlaskForm):
     submit = SubmitField()
 
 
-
 class AddContestant(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    age = StringField('Age', validators=[])
+    age = StringField('Age')
     institution = StringField('Institution', validators=[DataRequired()])
-    category = StringField('Cateogory', validators=[DataRequired()])
-    number = StringField('Phone number', validators=[DataRequired()])
+    category = StringField('Cateogory')    
+    number = StringField('Phone number', validators=[DataRequired(), Length(min=10, max=15, message="Your phone number should be more than 10 digits and less than 15")])
     description = StringField('Why should we nominate you?', widget=TextArea(), validators=[DataRequired()])
     picture = StringField('Add a picture')
     votes = IntegerField('Votes')

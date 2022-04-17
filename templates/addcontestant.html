@@ -3,6 +3,8 @@
 {% block body %}
 <div class="container">
 
+<section></section>
+
 <br>
 <!-- <h6>Hello, Welcome</h6> -->
 <h4><b>Add A Contestant</b></h4>
@@ -10,12 +12,16 @@
 <br>
 
 <form action="" method="post" enctype="multipart/form-data" >
-    {{ form.hidden_tag() }}
+    {{ form.hidden_tag() }} 
     <label for="image-picker">
-        <img id="image-preview" style="max-width: 30vw; max-height: 30vh; object-fit:cover" src="http://dummyimage.com/400x200/f5f5f5/000.jpg&text=Click+here+to+upload+your+image" alt="your image" />
+        <div>
+            <img id="image-preview" style="height: 30vh; object-fit:contain" src="{{url_for('static', filename='img/camera.png')}}" alt="your image" />
+        </div>      
+        <h6 id="error" style="color: red; display: none;">Please upload an image to continue</h6>
     </label>
 
-    <input style="display:none" id="image-picker" type="file" accept="image/*" />
+    <input style="display:none" id="image-picker" type="file" required="required" accept="image/*" />
+
     <div class="form-group">
         {{ form.name.label }}
         {{ form.name (class="form-control") }}
@@ -32,14 +38,40 @@
         {{ form.description.label }}
         {{ form.description (class="form-control") }}
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
         {{ form.number.label }}
         {{ form.number (class="form-control") }}
-    </div>
+        <div class="invalid-feedback">
+            {% for error in form.number.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div> -->
     <div style="display: none;" class="form-group">
         {{ form.picture.label }}
         {{ form.picture (id="firebaseLink",class="form-control") }}
     </div>
+
+
+
+    <!-- ----- -->
+    <div class="all">
+        <div class="form-group">
+          {{ form.number.label(id="label1") }}
+          {% if form.number.errors %}
+          {{ form.number(class="form-control form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+              {% for error in form.number.errors %}
+                  <span>{{ error }}</span>
+              {% endfor %}
+          </div>
+      {% else %}
+      {{ form.number(class="form-control", placeholder="Enter Your Phone Number", )}}
+      {% endif %}
+         
+
+        </div>
+      </div>
     <!-- <input type="text"  id="firebaseLink"> -->
     <!-- <div class="form-group">
         {{ form.votes.label }}
@@ -69,7 +101,9 @@
       </div>
 
     <div id="submitButton" style="text-align: left;"  class="form-group disabled">
-        <button class="button" style="background-color: #da2d2770;">Submit</button>
+        <a href="#error">
+            <button onclick="document.getElementById('error').style.display = 'block';" class="button" style="background-color: #da2d2770;">Submit</button>
+        </a>
     </div>
 
 
@@ -82,6 +116,8 @@
 
 $("#image-picker").change(function (event) {
     readURL(this);
+    document.getElementById('error').style.display = 'none';
+
 });
     function readURL(input) {
     if (input.files && input.files[0]) {
@@ -93,6 +129,8 @@ $("#image-picker").change(function (event) {
         }
 
         reader.readAsDataURL(input.files[0]);
+
+
     }
 }
 </script>
@@ -104,7 +142,7 @@ $("#image-picker").change(function (event) {
     // Push batch images to storage and store references in the database
     var pushImage = function (file) {
         document.getElementById('submitButton').innerHTML = `
-        <button class="button" style="background-color: #da2d2770;"><i class="fa fa-pause-circle-o" aria-hidden="true" style="color:'white'"></i>Uploading Images</button>
+        <button class="button" style="background-color: #da2d2770;"><i class="fa fa-pause-circle-o" aria-hidden="true" style="color:'white'"></i>Please wait while we upload your image</button>
         `
 
        // var uid = firebase.auth().currentUser.uid;
