@@ -379,6 +379,11 @@ def thanks(id, amount, ref):
     return redirect(url_for('home'))
     # return render_template('thankyou.html')
        
+
+@app.route('/sitemap')
+def sitemap():
+    return render_template('sitemap.xml')
+
 @app.route("/nothanks/<int:id>/<int:amount>")
 def nothanks(id, amount):
     user = Candidates.query.get_or_404(id) 
