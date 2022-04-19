@@ -193,6 +193,9 @@ def addcontestant():
         # sendtelegram(form.name.data + " has been nominated. Call on:" + form.number.data) 
         newNominationMessage="New Nomination:" +"\n" + form.name.data + " : " + form.number.data + "\n" + form.description.data + "\n" + "Category : " + form.category.data  + "\n" + "Instituition : " + form.institution.data  + "\n" + form.picture.data
         sendtelegram(newNominationMessage) 
+
+        message = "Hi " + form.name.data + ", thank you for nominating yourself or someone, a team will revert soon. If no response kindly contact 0209122358, for quick response and for other enquiries"
+        send_sms("aniXLCfDJ2S0F1joBHuM0FcmH",form.number.data, message, "GNMEA")
         # return redirect(url_for('adminCandidates'))
         return redirect(url_for('home'))
     # else:

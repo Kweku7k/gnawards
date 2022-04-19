@@ -10,6 +10,12 @@ body{
     margin-bottom: 0;
 }
 
+.imageCard{
+    background-color: #992726;
+    width: 100px;
+    height: 100px;
+}
+
 .scrolling-wrapper-flexbox {
     display: flex;
     flex-wrap: nowrap;

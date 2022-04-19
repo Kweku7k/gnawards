@@ -21,18 +21,22 @@
         <!-- <div class="col-md-4"> -->
             {% for candidate in candidates %}
             <div class="postCard">
-                <a href="{{url_for('editCandidate', candidate_id=candidate.id)}}">
 
+            <!-- <div class="imageCard">
+                <img src={{candidate.testField}} alt=""> 
+            </div> -->
+
+            <a href="{{url_for('editCandidate', candidate_id=candidate.id)}}">
                 <div>
                     <h5 class="text">{{candidate.name}}</h5>
                     <h6 class="text-muted">{{candidate.votes }}</h6>
                 </div>
+            </a>
                 <div>
                     <a href="{{url_for('deleteCandidate', candidate_id=candidate.id)}}">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </div>
-                </a>
             </div>
             {% endfor %}
 
