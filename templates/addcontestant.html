@@ -15,7 +15,11 @@
     {{ form.hidden_tag() }} 
     <label for="image-picker">
         <div>
+            {% if editCandidate %}
+            <img id="image-preview" style="height: 30vh; object-fit:contain" src={{candidate.testField}} alt="your image" />
+            {% else %}
             <img id="image-preview" style="height: 30vh; object-fit:contain" src="{{url_for('static', filename='img/camera.png')}}" alt="your image" />
+            {% endif %}
         </div>      
         <h6 id="error" style="color: red; display: none;">Please upload an image to continue</h6>
     </label>
@@ -100,11 +104,18 @@
         </select>
       </div>
 
-    <div id="submitButton" style="text-align: left;"  class="form-group disabled">
-        <a href="#error">
-            <button onclick="document.getElementById('error').style.display = 'block';" class="button" style="background-color: #da2d2770;">Submit</button>
-        </a>
-    </div>
+      {% if editCandidate %}
+        <div id="submitButton" style="text-align: left;"  class="form-group disabled">
+                <button class="button" style="background-color: #da2d27;">Update</button>
+        </div>
+      {% else %}
+        <div id="submitButton" style="text-align: left;"  class="form-group disabled">
+            <a href="#error">
+                <button onclick="document.getElementById('error').style.display = 'block';" class="button" style="background-color: #da2d2770;">Submit</button>
+            </a>
+        </div>
+      {% endif %}
+
 
 
 

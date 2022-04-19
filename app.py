@@ -293,22 +293,29 @@ def edit(post_id):
 def editCandidate(candidate_id):
     form = AddContestant()
     candidate = Candidates.query.get_or_404(candidate_id)
+    categories = Category.query.all()
+    subcategories = SubCategory.query.all()
     print(candidate_id)
     if request.method == 'GET':
         form.name.data = candidate.name
         form.description.data = candidate.description
-        form.age.data = candidate.age
+        form.number.data = candidate.number
+        form.institution.data = candidate.institution
         form.votes.data = candidate.votes
+        form.picture.data = candidate.testField
     elif request.method == 'POST':
         print("Post ")
-        if form.validate_on_submit(): 
+        if form.validate_on_submit():
             candidate.name = form.name.data
             candidate.description = form.description.data
+            candidate.number = form.number.data
+            candidate.institution = form.institution.data
             candidate.votes = form.votes.data
+            candidate.testField = form.picture.data
             db.session.commit()
             flash(f'Your post has been editted succesfully','success')
             return redirect(url_for('adminCandidates'))
-    return render_template('editcandidate.html', form=form, candidate=candidate, post=post)
+    return render_template('addcontestant.html', form=form, categories=categories, subcategories=subcategories, candidate=candidate, editCandidate=True,  post=post)
 
 @app.route('/updates')
 def updates(): 

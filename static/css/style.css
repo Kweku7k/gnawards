@@ -10,10 +10,17 @@ body{
     margin-bottom: 0;
 }
 
-.imageCard{
-    background-color: #992726;
+.inImge{
+    object-fit: cover;
     width: 100px;
     height: 100px;
+}
+
+.imageCard{
+    /* background-color: #992726; */
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
 }
 
 .scrolling-wrapper-flexbox {

@@ -3,7 +3,7 @@
 {% block body %}
 <div class="container">
     <br>
-    <div style="display:'flex">
+    <div>
         <div>
             <h6>Hello, Welcome</h6>
             <h4><b>All Your Candidates</b></h4>
@@ -26,12 +26,25 @@
                 <img src={{candidate.testField}} alt=""> 
             </div> -->
 
+            <div style="display: flex;">
+
+            <div class="imageCard">
+                <img style="object-fit: cover; width: 100px; height: 100px; margin-right: 20px; border-radius: 10px;" src={{candidate.testField}}>   
+            </div>
+
             <a href="{{url_for('editCandidate', candidate_id=candidate.id)}}">
-                <div>
+                <div style="margin-left:20px ;">
                     <h5 class="text">{{candidate.name}}</h5>
-                    <h6 class="text-muted">{{candidate.votes }}</h6>
+                    <h6 class="text">{{candidate.category }}</h6>
+                    <h6 class="text-muted">{{candidate.institution }}</h6>
+                    <a href="tel:{{candidate.number}}">
+                        <h6 class="text-muted">{{candidate.number }}</h6>
+                    </a>
                 </div>
             </a>
+        </div>
+
+
                 <div>
                     <a href="{{url_for('deleteCandidate', candidate_id=candidate.id)}}">
                         <i class="fa fa-trash" aria-hidden="true"></i>
