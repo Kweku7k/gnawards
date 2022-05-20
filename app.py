@@ -30,8 +30,8 @@ migrate = Migrate(app, db)
 
 app.config['SECRET_KEY'] = 'll91628bb0b13ce0c676d32e2vsba245'
 app.config['UPLOADED_IMAGES_DEST'] = 'static/uploads/images'
-app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///test.db'
-# app.config['SQLALCHEMY_DATABASE_URI']= 'postgres://eaozkuagjcyspm:4b1d05b75a1d0e956977ccab32d3c6542ad6f433d65ef2ea7cd9d0e3be069e77@ec2-3-217-251-77.compute-1.amazonaws.com:5432/d3nljg5tlb58ot'
+# app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI']= 'postgres://eaozkuagjcyspm:4b1d05b75a1d0e956977ccab32d3c6542ad6f433d65ef2ea7cd9d0e3be069e77@ec2-3-217-251-77.compute-1.amazonaws.com:5432/d3nljg5tlb58ot'
 # Takes the name of the file and the extensions
 images = UploadSet('images', IMAGES)
 configure_uploads(app, images)
