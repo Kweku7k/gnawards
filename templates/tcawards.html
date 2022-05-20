@@ -1,0 +1,379 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block body %}
+
+
+<section id="hero">
+    <div class="overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <!-- <h6 style="font-weight: 100;">WELCOME TO CU SRC</h6> -->
+                    <h1><b>Tertiary Awards</b></h1>
+                    <!-- <p>We are here for you. You can find all the information concerning the school here. You can also contact us for any pressing information</p> -->
+                    <p> NULL.</p>
+                    <a href="{{url_for("addcontestant", award="tca")}}">
+                        <button class="button">Fill Forms Here</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <div class="modal show" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+<section id="new">
+<div class="container">
+    <div class="flexrow">   
+        <div>
+            <h4>Updates</h4>
+            <hr class="header-line">
+        </div>
+        <a href="{{url_for("updates")}}">
+            <u><h6 style="font-weight: 100;">View All <i class="fas fa-long-arrow-alt-right"></i></h6></u>
+        </a>
+    </div>
+    <div class="row">
+
+        {% for post in limitpost %} 
+        <div class="col-md-4">
+
+            <div data-aos="fade-up" data-aos-delay="100">
+
+            <a href="{{url_for('post', id=post.id)}}">
+                
+            <div class="card" style="width: 100%;">
+                <div>
+                    <!-- {{ url_for('static',filename='img/Fries-porn.png')}} -->
+                    <!-- <img src="{{url_for("static", filename='uploads/images/' + post.image_file)}}" alt="SRC SOCIALS" width="100%"> -->
+                    <img src="{{post.author}}" height="300px" style="object-fit: cover;" alt="SRC SOCIALS" width="100%">
+                </div>
+                <div class="subcard">
+                    <h4>{{post.title}} <i class="fa fa-arrow-right" aria-hidden="true"></i></h4>
+                    <h6 class="text-muted" style="font-weight: 100;">View More</h6>
+                </div>
+            </div>
+        </a>
+
+        </div>
+    </div>    
+        {% endfor %}
+       
+    </div>
+</div>
+</section>
+
+
+<section id="new">
+    <div class="container">
+        <div class="flexrow">   
+            <div>
+                <h4>About Us</h4>
+                <hr class="header-line">
+            </div>
+            </div>
+            <!-- <a href="{{url_for("updates")}}">
+                <u><h6 style="font-weight: 100;">View All <i class="fas fa-long-arrow-alt-right"></i></h6></u>
+            </a> -->
+
+            <p>
+                <b>GNMEA</b>
+<b>Overview</b>
+<br/>
+Ghana Nurses and Midwives Excellence  Awards is the first business, lifestyle and academia ,  competitive, educational, Creative and entertainment awards program that aims to recognize student Nurses/midwives who have shown exceptional hardwork to enrich campus life in excellence and in health.
+Innovative Quadrant gh is an organisation created to change this, with a focus on rewarding these students as a way to highlight outstanding students.
+<br/>
+<br/>
+
+Ghana nurses and midwives Excellence Awards is an initiative media headlined by Global media Alliance (ETV, Yfm and happy fm) and also in partnership with UNSAG and GahTi and powered by IQGh
+<br/>
+
+1. It focuses on putting students on platforms and getting them recognized to the general public and cooperative brands and individuals as well.
+<br/>
+2. It's an award scheme for both degree nursing/midwives students and traning nurses/midwives 
+<br/>
+3. It will also serve as a medium to bring all health students together from different parts of the country.
+<br/>
+4. Though it's an awards scheme, the platform creates a business opportunity as well for students to be recognized by sponsors or other brands out there. 
+In this awards scheme you can be a winner but might not be a brand ambassador or might not be rewarded by them due to the task preformed for them, but you might be a brand ambassador based on your potentials recognized.
+<br/>
+4. Additionally it's a platform seekng to bring brands(institutions) closer to their target audience to create a business opportunity.
+<br/>
+5. Application is free on our website 
+<br/>
+6. All student participants are advised to get a passport so in case you should win the travel package the process would be easy (if they have or don't have they will be given a link to get one done the moment they are selected)
+This awards scheme is a business, lifestyle and academia awards scheme
+<br/>
+<br/>
+
+<b> Requirements </b>
+<br/>
+There are over <b>25</b> categories 
+<br/>
+Some of them come with requirements needed to endorse your skill, talent or academic background.
+<br/>
+
+
+<b>Task</b>
+<br/>
+Every Nominee gets a chance to be interviewed live on air with sponsors or bloggers.
+Based on the category requirements, student nominees' works will be published equally to create awareness 100% for their skills, talents or businesses.
+Every Nominee for a period would have a chance to impress a brand or sponsor by performing a task or activity for a brand.
+This will give students the chance to have a working relationship with the brand that gets to be impressed.
+<br/>
+
+<b>Benefits for all Nominees</b>
+<br/>
+_ Publicity (on Air, websites, bloggers' sites and socials)
+<br/>
+
+_Business deals and prices(by performing tasks proposed by sponsors and brands)
+<br/>
+<br/>
+
+
+<b>Awards and Benefits</b>
+<br/>
+1.Every winner of each category will be awarded a plaque and citation.
+<br/>
+2.Highest number of votes will give students in any category a prize package all under terms and conditions.
+-vacation trip.
+<br/>
+3.Though it's an awards we would equally appreciate second highest voters with an internal classy vacation trip. 
+-electronic gadgets and cash prizes will also be awarded to category winners who will all reach the terms and conditions of their category.
+<br/>
+
+This is the biggest nurses and midwives awards festival.
+
+<b>Powered by IQgh</b>
+            </p>
+        </div>
+        <div class="row">
+
+        </div>
+        </div>  
+</section>    
+
+
+<!-- <section>
+    <div style="background-color: darkred; color: white; padding: 10px; padding: 30px 10px; text-align: center;">
+        <h4 style="font-weight: 100;">If there is a specific issue you are trying to raise with us, you can submit it here</h4>
+        <a href={{url_for("feedback")}}>
+            <button class="button" style="color:#DA2C27; background-color: white;"><i class="fas fa-search"></i> Submit Now</button>
+        </a>
+    </div>
+</section> -->
+
+<section id="conversations">
+<div class="container">
+    <div class="flexrow">   
+        <div>
+            <h4>Categories</h4>
+            <hr class="header-line">
+        </div>
+        <a href="#">
+            <!-- <u><h6 style="font-weight: 100;">View All <i class="fas fa-long-arrow-alt-right"></i></h6></u> -->
+        </a>
+    </div>
+    <div class="row">
+
+        {% for category in categories %}
+        
+        <div class="col-md-4" >
+                <div data-aos="fade-up" data-aos-delay="100">
+                <div class="conversation">
+                <!-- <img src="{{url_for("static",filename="img/nkrumah.png")}}" width="70px" height="70px" style="object-fit: cover; "> -->
+                <!-- <a href='{{url_for("showCategory", category=category.title)}}'> -->
+
+                    <div style="padding: 10px;">
+                        <h6 style="margin-bottom: 0; align-items: center;"><b>{{category.title}}</b></h6>
+                        <!-- <p class="text-muted" style="margin-bottom: 0;"><b>6</b> contestants</p> -->
+                    </div>
+                <!-- </a> -->
+            </div>
+        </div>
+        </div>  
+
+        {% endfor %}
+
+
+        <!-- <div class="col-md-4" >
+            <div class="conversation">
+                <img src="{{url_for("static",filename="img/nkrumah.png")}}" width="70px" height="70px" style="object-fit: cover; padding: 10px;">
+                <div>
+                    <h6>Petition Acceptance</h6>
+                    <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam,</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" >
+            <div class="conversation">
+                <img src="{{url_for("static",filename="img/nkrumah.png")}}" width="70px" height="70px" style="object-fit: cover; padding: 10px;">
+                <div>
+                    <h6>Petition Acceptance</h6>
+                    <p class="text-muted" style="margin-bottom: 0;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam,</p>
+                </div>
+            </div>
+        </div> -->
+
+
+
+    </div>
+</div>
+
+</section>
+
+
+
+<!-- <section id="team">
+    <div class="container">
+
+        <div class="flexrow">   
+            <div>
+                <h4>Meet Our Team</h4>
+                <hr class="header-line">
+            </div>
+            <a href="{{url_for("team")}}">
+                <u><h6 style="font-weight: 100;">View All <i class="fas fa-long-arrow-alt-right"></i></h6></u>
+            </a>
+        </div>
+
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+
+                            <img src="{{url_for("static", filename='img/team/Nargeh.jpg')}}" alt="SRC SOCIALS" width="100%" height="250px" style="object-fit: cover;">
+
+                        <div class="subcard">
+                            <h6 class="text-muted" style="font-weight: 100;">SRC PRESIDENT</h6>
+                            <h6>Emmanuel Nargeh </h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <img src="{{url_for("static", filename='img/team/Vice.jpeg')}}" alt="SRC SOCIALS" width="100%" height="250px" style="object-fit: cover;">
+
+                    <div class="subcard">
+                        <h6 class="text-muted" style="font-weight: 100;">SRC VICE PRESIDENT</h6>
+                        <h6>Daniel Mensah </h6>
+                    </div>
+                </div>
+
+                    <div class="col-md-3">
+                        <img src="{{url_for("static", filename='img/team/derrick.jpg')}}" alt="SRC SOCIALS" width="100%" height="250px" style="object-fit: cover;">
+
+                        <div class="subcard">
+                            <h6 class="text-muted" style="font-weight: 100;">SRC PRO</h6>
+                            <h6>Demor Dotse Derrick</h6>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">  
+                        <img src="{{url_for("static", filename='img/team/Degraft.jpg')}}" alt="SRC SOCIALS" width="100%" height="250px" style="object-fit: cover;">
+                        <div class="subcard">
+                            <h6 class="text-muted" style="font-weight: 100;">SRC ORGANIZING SEC.</h6>
+                            <h6>Degraft Yeboah </i></h6>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <img src="{{url_for("static", filename='img/team/Kwame.jpg')}}" alt="SRC SOCIALS" width="100%">
+                        <div class="subcard">
+                            <h6 class="text-muted" style="font-weight: 100;">SRC ENTERCOM CHAIRMAN</h6>
+                            <h6>Kwame Attafuah</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<!-- <div class="modal show fade" id="myModal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Modal header</h3>
+    </div>
+    <div class="modal-body">
+        <p>One fine body…</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
+    </div>
+</div> -->
+
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- <img src="{{url_for("static", filename="img/solologo.png")}}" width="30%"> -->
+                <h4>GNMEA </h4>
+                <!-- <p>Some text about the event</p> -->
+                <hr style="color: white;">
+                <div class="row">   
+
+                <div class="icon" style="display: flex;">
+                    <a href="https://www.instagram.com/gnme_a/">
+                        <!-- <i class="fa fa-instagram 2x" aria-hidden="true"></i> -->
+                        <h6> @gnmea</h6>
+                    </a>
+                </div>
+                <!-- <div class="icon">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </div> -->
+            </div>
+
+            
+
+            </div>
+<div class="col-md-6"></div>
+            <div class="col-md-3">
+                <h6><b>Contact Us</b></h6>
+                <h6>You can reach the GNMEA through our many plaforms. </h6>
+                <a style="color: white;" href="tel:0544753149"><h6><i class="fa fa4-phone-square" aria-hidden="true"></i>0544753149</h6></a>
+                <a style="color: white;" href="tel:0209122358"><h6><i class="fa fa4-phone-square" aria-hidden="true"></i>0209122358</h6></a>
+                <a style="color: white;" href="email:studentnursesmidwivesawards@gmail.com"><h6><i class="fa fa4-phone-square" aria-hidden="true"></i>studentnursesmidwivesawards@gmail.com</h6></a>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+<!-- <script type="text/javascript">
+    $(window).on('load', function() {
+        $('#myModal').modal('show');
+    });
+</script> -->
+
+
+{% endblock %}

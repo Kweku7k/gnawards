@@ -30,8 +30,8 @@ migrate = Migrate(app, db)
 
 app.config['SECRET_KEY'] = 'll91628bb0b13ce0c676d32e2vsba245'
 app.config['UPLOADED_IMAGES_DEST'] = 'static/uploads/images'
-# app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///test.db'
-app.config['SQLALCHEMY_DATABASE_URI']= 'postgres://eaozkuagjcyspm:4b1d05b75a1d0e956977ccab32d3c6542ad6f433d65ef2ea7cd9d0e3be069e77@ec2-3-217-251-77.compute-1.amazonaws.com:5432/d3nljg5tlb58ot'
+app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///test.db'
+# app.config['SQLALCHEMY_DATABASE_URI']= 'postgres://eaozkuagjcyspm:4b1d05b75a1d0e956977ccab32d3c6542ad6f433d65ef2ea7cd9d0e3be069e77@ec2-3-217-251-77.compute-1.amazonaws.com:5432/d3nljg5tlb58ot'
 # Takes the name of the file and the extensions
 images = UploadSet('images', IMAGES)
 configure_uploads(app, images)
@@ -58,6 +58,7 @@ class Candidates(db.Model):
     subcategory = db.Column(db.String)
     description = db.Column(db.String)
     number = db.Column(db.String(), default=0)
+    award = db.Column(db.String(), default="None")
     age = db.Column(db.String)
     institution = db.Column(db.String())    
     votes = db.Column(db.Integer, default = 0)
@@ -178,31 +179,42 @@ def post(id):
     print(post)
     return render_template('post.html', post=post)
 
-@app.route("/addcontestant", methods=['POST','GET'])    
-def addcontestant():
+@app.route("/addcontestant/<string:award>", methods=['POST','GET'])    
+def addcontestant(award):
     form = AddContestant()
     print("in form function")
     categories = Category.query.all()
     subcategories = SubCategory.query.all()
     if form.validate_on_submit():
         print("validated successful")
-        newForm = Candidates(name=form.name.data, age="21", category=form.category.data, description=form.description.data, institution=form.institution.data, image_file="form.picture.data", votes=form.votes.data, number=form.number.data, testField = form.picture.data)
+        newForm = Candidates(award=award, name=form.name.data, age="21", category=form.category.data, description=form.description.data, institution=form.institution.data, image_file="form.picture.data", votes=form.votes.data, number=form.number.data, testField = form.picture.data)
         db.session.add(newForm)
         db.session.commit()
-        flash(f' ' + form.name.data + ' has been nominated for review', 'success')
+        flash(f' ' + form.name.data + ' has been nominated for ' + award + ' review', 'success')
         # sendtelegram(form.name.data + " has been nominated. Call on:" + form.number.data) 
         newNominationMessage="New Nomination:" +"\n" + form.name.data + " : " + form.number.data + "\n" + form.description.data + "\n" + "Category : " + form.category.data  + "\n" + "Instituition : " + form.institution.data  + "\n" + form.picture.data
-        sendtelegram(newNominationMessage) 
-
         message = "Hi " + form.name.data + ", thank you for nominating yourself or someone, a team will revert soon. If no response kindly contact 0209122358, for quick response and for other enquiries"
-        send_sms("aniXLCfDJ2S0F1joBHuM0FcmH",form.number.data, message, "GNMEA")
-        # return redirect(url_for('adminCandidates'))
+
+        if award == 'gnmea':
+            pass
+            # send_sms("aniXLCfDJ2S0F1joBHuM0FcmH",form.number.data, message, "GNMEA")
+            # sendtelegram(newNominationMessage) 
+        elif award == 'tca':
+            pass
+            # send_sms("aniXLCfDJ2S0F1joBHuM0FcmH",form.number.data, message, "GNMEA")
+            # sendtelegram(newNominationMessage) 
+        else:
+            print('There was no election stated.')
         return redirect(url_for('home'))
     # else:
     #     return redirect(url_for('home'))
         # flash(f'There has been a problem, please try again later', 'danger')
-        
     return render_template('addcontestant.html', form=form, subcategories=subcategories, categories=categories)
+
+@app.route('/home')
+def landing():
+    pass
+    return render_template('landing.html')
 
 @app.route("/addcategory", methods=['POST','GET'])    
 def addCategory():
@@ -248,6 +260,11 @@ def showCategory(category):
     print(candidates)
     return render_template('allCandidates.html', category=category, candidates=candidates)
 
+
+@app.route('/tca')
+def tca():
+    pass
+    return render_template('tcawards.html')
 
 @app.route("/delete/<int:post_id>")
 def delete(post_id):

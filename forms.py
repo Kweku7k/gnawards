@@ -13,7 +13,6 @@ class AddPostForm(FlaskForm):
     content = StringField('Description', widget=TextArea(), validators=[DataRequired()])
     submit = SubmitField()
 
-
 class AddGallery(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     image = StringField('Image Link', widget=TextArea(), validators=[DataRequired()])
@@ -24,7 +23,6 @@ class AddCategory(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     submit = SubmitField()
 
-
 class AddContestant(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     age = StringField('Age')
@@ -33,9 +31,9 @@ class AddContestant(FlaskForm):
     number = StringField('Phone number', validators=[DataRequired(), Length(min=10, max=15, message="Your phone number should be more than 10 digits and less than 15")])
     description = StringField('Why should we nominate you?', widget=TextArea(), validators=[DataRequired()])
     picture = StringField('Add a picture')
+    # fields = BooleanField('Label',choices=[('one','one'),('two','two'),('three','three'),('four','four')])
     votes = IntegerField('Votes')
     submit = SubmitField()
-
 
 class RegistrationForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
