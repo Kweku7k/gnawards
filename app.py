@@ -164,9 +164,11 @@ def sendtelegram(params):
 @app.route('/faceofcu',methods=['GET','POST'])
 def faceofcu():
     candidates = Candidates.query.all()
-    return render_template('faceofcu.html', candidates=candidates)
+    print(candidates)
+    return render_template('allCandidates.html', candidates=candidates)
+    # return candidates
 # Default Config
-@app.route('/',methods=['GET','POST'])
+@app.route('/gnmea',methods=['GET','POST'])
 def home():
     limitpost = Posts.query.order_by(Posts.id.asc()).limit(3).all()
     categories = SubCategory.query.order_by(SubCategory.id.desc()).all()
@@ -211,7 +213,7 @@ def addcontestant(award):
         # flash(f'There has been a problem, please try again later', 'danger')
     return render_template('addcontestant.html', form=form, subcategories=subcategories, categories=categories)
 
-@app.route('/home')
+@app.route('/')
 def landing():
     pass
     return render_template('landing.html')
@@ -391,8 +393,8 @@ def thanks(id, amount, ref):
     # print("Total of" + str(candidate.updatedVotes) )
     db.session.add(newVote)
     db.session.commit()
+    sendtelegram(str(amount) + ' votes have been casted for ' + user.name)
 
-    
     print("User Votes = " + str(user.votes))
     api_key = "aniXLCfDJ2S0F1joBHuM0FcmH" #Remember to put your own API Key here
     phone = "0545977791, 0544588320" #SMS recepient"s phone number
@@ -405,7 +407,7 @@ def thanks(id, amount, ref):
     flash(f'' + str(amount) + ' votes(s) have been cast for ' + user.name,'success')
     return redirect(url_for('home'))
     # return render_template('thankyou.html')
-       
+
 
 @app.route('/sitemap')
 def sitemap():
