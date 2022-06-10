@@ -266,11 +266,10 @@ def showCategory(category):
     print(candidates)
     return render_template('allCandidates.html', category=category, candidates=candidates)
 
-
 @app.route('/tca')
 def tca():
-    pass
-    return render_template('tcawards.html')
+    categories = SubCategory.query.all()
+    return render_template('tcawards.html', categories = categories)
 
 @app.route("/delete/<int:post_id>")
 def delete(post_id):
