@@ -115,6 +115,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    award = db.Column(db.String, default="gnmea")
     
     def __repr__(self):
         return f"Category ('{self.title}')"
@@ -125,6 +126,7 @@ class SubCategory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     parent = db.Column(db.String)
     title = db.Column(db.String)
+    award = db.Column(db.String)
     mainCategory = db.Column(db.String)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     
@@ -218,12 +220,13 @@ def landing():
     pass
     return render_template('landing.html')
 
-@app.route("/addcategory", methods=['POST','GET'])    
-def addCategory():
+@app.route("/addcategory/<string:award>", methods=['POST','GET'])    
+def addCategory(award):
     form = AddCategory()
-    categories = Category.query.order_by(Category.id.desc()).all()
+    categories = Category.query.filter_by(award=award).order_by(Category.id.desc()).all()
+    print(award)
     if form.validate_on_submit():
-        newCategory = Category(title=form.title.data)
+        newCategory = Category(title=form.title.data, award=award)
         db.session.add(newCategory)
         db.session.commit()
         flash(f' ' + form.title.data + ' category has been created', 'success')
@@ -234,16 +237,17 @@ def addCategory():
         return redirect(url_for('addCategory'))
     return render_template('addcategory.html', categories=categories, form=form)
 
-@app.route("/addsubcategory", methods=['POST','GET'])    
-def addSubCategory():
+@app.route("/addsubcategory/<string:award>", methods=['POST','GET'])    
+def addSubCategory(award):
     # form = AddCategory()
+    print(award)
     mainCategory = "asdf"
     print(mainCategory)
-    categories = Category.query.order_by(Category.id.desc()).all()
-    subcategories = SubCategory.query.all()
+    categories = Category.query.filter_by(award = award).order_by(Category.id.desc()).all()
+    subcategories = SubCategory.query.filter_by(award = award).all()
     if request.method == 'POST':
         mainCategory = request.form.get('category')
-        newSubcategory = SubCategory(parent=mainCategory, title=request.form.get('subcategory'))
+        newSubcategory = SubCategory(parent=mainCategory, award=award, title=request.form.get('subcategory'))
         db.session.add(newSubcategory)
         db.session.commit()
         flash(f' ' + mainCategory + ' subcategory has been created', 'success')
