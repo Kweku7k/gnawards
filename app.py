@@ -255,8 +255,8 @@ def addSubCategory(award):
         # newNominationMessage="New Nomination:" + form.name.data + " : " + form.number.data + "\n" + form.description.data
         # sendtelegram(newNominationMessage) 
         # return redirect(url_for('adminCandidates'))
-        return redirect(url_for('addSubCategory'))
-    return render_template('addsubcategory.html', categories=categories, subcategories=subcategories )
+        return redirect(url_for('addSubCategory', award=award))
+    return render_template('addsubcategory.html', categories=categories, subcategories=subcategories)
 
 @app.route("/category/<string:category>")
 def showCategory(category):
