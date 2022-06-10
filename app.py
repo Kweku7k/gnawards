@@ -234,7 +234,7 @@ def addCategory(award):
         # newNominationMessage="New Nomination:" + form.name.data + " : " + form.number.data + "\n" + form.description.data
         # sendtelegram(newNominationMessage) 
         # return redirect(url_for('adminCandidates'))
-        return redirect(url_for('addCategory'))
+        return redirect(url_for('addCategory', award=award))
     return render_template('addcategory.html', categories=categories, form=form)
 
 @app.route("/addsubcategory/<string:award>", methods=['POST','GET'])    
@@ -251,7 +251,7 @@ def addSubCategory(award):
         db.session.add(newSubcategory)
         db.session.commit()
         flash(f' ' + mainCategory + ' subcategory has been created', 'success')
-        # sendtelegram(form.name.data + " has been nominated. Call on:" + form.number.data) 
+        # sendtelegram(form.name.data + " has been nominated. Call on:" + forCREm.number.data) 
         # newNominationMessage="New Nomination:" + form.name.data + " : " + form.number.data + "\n" + form.description.data
         # sendtelegram(newNominationMessage) 
         # return redirect(url_for('adminCandidates'))
